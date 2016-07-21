@@ -6,14 +6,17 @@
 
 #define COPY_STR(dst,src)  { strncpy_s(dst,src,sizeof(dst)-1); dst[sizeof(dst)-1]=0; }
 
-P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper() :P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper((String^)nullptr)
+P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(int serverId) :P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper((String^)nullptr, serverId)
 {
 	
 }
 
-P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(String^ metatraderLibraryPath)
+P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(String^ metatraderLibraryPath, int serverId)
 {
 	char* path = Convert(metatraderLibraryPath);
+
+	ServerId = serverId;
+
 	_manager = new CManager(path);
 	if (_manager == NULL)
 		throw gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException("Failed to instantiate manager instance");
@@ -21,10 +24,12 @@ P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(String^ metatraderLibraryPath)
 		throw gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException("Failed to instantiate manager instance");
 }
 
-P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(P23::MetaTrader4::Manager::Contracts::ConnectionParameters^ connectionParameters, String^ metatraderLibraryPath) : P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(metatraderLibraryPath)
+P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(P23::MetaTrader4::Manager::Contracts::ConnectionParameters^ connectionParameters, String^ metatraderLibraryPath, int serverId) : P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(metatraderLibraryPath, serverId)
 {
 	char* server = Convert(connectionParameters->Server);
 	char* password = Convert(connectionParameters->Password);
+
+	ServerId = serverId;
 
 	if (server == NULL)
 		throw gcnew ArgumentException("Server is required");
@@ -43,7 +48,7 @@ P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(P23::MetaTrader4::Manager::Con
 	}
 }
 
-P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(P23::MetaTrader4::Manager::Contracts::ConnectionParameters^ connectionParameters) : P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(connectionParameters, nullptr)
+P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(P23::MetaTrader4::Manager::Contracts::ConnectionParameters^ connectionParameters, int serverId) : P23::MetaTrader4::Manager::ClrWrapper::ClrWrapper(connectionParameters, nullptr, serverId)
 {	
 	
 }
