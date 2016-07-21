@@ -1,16 +1,19 @@
-﻿namespace P23.MetaTrader4.Manager.Contracts
+﻿using System;
+
+namespace P23.MetaTrader4.Manager.Contracts
 {
     /// <summary>
     /// Pumping Mode Flags to be used
 	/// when calling PumpingSwitchEx method
     /// </summary>
-    public enum PumpingModeFlags
+    [Flags]
+    public enum PumpingMode
     {
         //--- user flags
         /// <summary>
         /// No flags
         /// </summary>
-        NoFlags = 0,
+        Default = 0,
 
         /// <summary>
         /// do not send ticks

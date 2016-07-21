@@ -2,7 +2,7 @@
 
 #include "P23.MetaTrader4.Manager.ClrWrapper.h"
 
-int P23::MetaTrader4::Manager::ClrWrapper::PumpingSwitchEx(int pumpingFlags)
+int P23::MetaTrader4::Manager::ClrWrapper::PumpingSwitchEx(P23::MetaTrader4::Manager::Contracts::PumpingMode pumpingMode)
 {
 	if (_callBackHandler.IsAllocated)
 		_callBackHandler.Free();
@@ -10,7 +10,7 @@ int P23::MetaTrader4::Manager::ClrWrapper::PumpingSwitchEx(int pumpingFlags)
 	_extendedPumpingCallBack = gcnew ExtendedCallBackDelegate(this, &ClrWrapper::ExtendedPumpingNotify);
 	_callBackHandler = GCHandle::Alloc(_extendedPumpingCallBack);
 	
-	return _manager->Manager->PumpingSwitchEx((MTAPI_NOTIFY_FUNC_EX)Marshal::GetFunctionPointerForDelegate(_extendedPumpingCallBack).ToPointer(), pumpingFlags, NULL);
+	return _manager->Manager->PumpingSwitchEx((MTAPI_NOTIFY_FUNC_EX)Marshal::GetFunctionPointerForDelegate(_extendedPumpingCallBack).ToPointer(), (int)pumpingMode, NULL);
 }
 
 void P23::MetaTrader4::Manager::ClrWrapper::ExtendedPumpingNotify(int code, int type, void *data, void *param)
