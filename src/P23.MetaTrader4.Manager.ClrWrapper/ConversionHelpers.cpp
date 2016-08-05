@@ -1822,6 +1822,8 @@ ReportGroupRequest* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrad
 	if (name != NULL)
 		COPY_STR(output->name, name);
 	
+	Marshal::FreeHGlobal(IntPtr(name));
+
 	output->to = input->To;
 
 	return output;
