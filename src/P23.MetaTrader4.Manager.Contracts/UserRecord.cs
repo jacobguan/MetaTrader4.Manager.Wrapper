@@ -206,5 +206,10 @@ namespace P23.MetaTrader4.Manager.Contracts
         /// Color got to client (used by MT Manager)
         /// </summary>
         public UInt32 UserColor { get; set; }
+
+        /// <summary>
+        /// This field stores user data of Manager API
+        /// </summary>
+        public string ApiData { get; set; }
     }
 }

@@ -18,6 +18,10 @@ String^ P23::MetaTrader4::Manager::ClrWrapper::SrvFeederLog(String^ name)
 {
 	char* n = Convert(name);
 	int total = 0;
+
 	LPCSTR result = _manager->Manager->SrvFeederLog(n, &total);
+
+	Marshal::FreeHGlobal(IntPtr(n));
+
 	return gcnew String(result);
 }

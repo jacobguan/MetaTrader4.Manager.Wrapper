@@ -10,7 +10,13 @@ void P23::MetaTrader4::Manager::ClrWrapper::LogsOut(int code, System::String^ so
 	if (System::String::IsNullOrEmpty(msg))
 		throw gcnew ArgumentNullException("msg");
 	
-	_manager->Manager->LogsOut(code, Convert(source), Convert(msg));
+	char* s = Convert(source);
+	char* m = Convert(msg);
+
+	_manager->Manager->LogsOut(code, s, m);
+
+	Marshal::FreeHGlobal(IntPtr(s));
+	Marshal::FreeHGlobal(IntPtr(m));
 }
 
 void P23::MetaTrader4::Manager::ClrWrapper::LogsMode(int mode)

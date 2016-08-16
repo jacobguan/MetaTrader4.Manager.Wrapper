@@ -10,6 +10,8 @@ int P23::MetaTrader4::Manager::ClrWrapper::TradeTransaction(P23::MetaTrader4::Ma
 	if (result == 0)
 		info->Order = transaction->order;
 
+	delete transaction;
+
 	return result;
 }
 
@@ -39,6 +41,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 		output->Add(Convert(&trades[i]));
 
 	_manager->Manager->MemFree(trades);
+	delete[] o;
 
 	return output;
 }
@@ -58,6 +61,11 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 
 int P23::MetaTrader4::Manager::ClrWrapper::TradeCheckStops(P23::MetaTrader4::Manager::Contracts::TradeTransInfo^ trade, double price)
 {
-	return _manager->Manager->TradeCheckStops(Convert(trade), price);
+	TradeTransInfo* tti = Convert(trade);
+
+	int result = _manager->Manager->TradeCheckStops(tti, price);
+	delete tti;
+
+	return result;
 }
 

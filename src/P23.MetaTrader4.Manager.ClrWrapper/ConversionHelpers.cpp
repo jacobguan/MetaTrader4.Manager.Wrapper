@@ -53,6 +53,7 @@ ConManager* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Man
 	char* groups = Convert(configuration->Groups);
 	if (groups != NULL)
 		COPY_STR(tManager->groups, groups);
+	Marshal::FreeHGlobal(IntPtr(groups));
 	
 	tManager->info_depth = configuration->InfoDepth;
 	tManager->ipfilter = configuration->IpFilter;
@@ -64,6 +65,7 @@ ConManager* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Man
 	char* mailbox = Convert(configuration->Mailbox);
 	if (mailbox != NULL)
 		COPY_STR(tManager->mailbox, mailbox);
+	Marshal::FreeHGlobal(IntPtr(mailbox));
 	
 	tManager->manager = configuration->ManagerRights;
 	tManager->market = configuration->Market;
@@ -73,6 +75,7 @@ ConManager* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Man
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(tManager->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 	
 	tManager->news = configuration->News;
 	tManager->notifications = configuration->Notifications;
@@ -178,10 +181,12 @@ ConCommon* P23::MetaTrader4::Manager::ClrWrapper::Convert(Common^ configuration)
 	char* adapters = Convert(configuration->Adapters);
 	if (adapters != NULL)
 		COPY_STR(newConfiguration->adapters, adapters);
+	Marshal::FreeHGlobal(IntPtr(adapters));
 
 	char* accountUrl = Convert(configuration->AccountUrl);
 	if (accountUrl != NULL)
 		COPY_STR(newConfiguration->account_url, accountUrl);
+	Marshal::FreeHGlobal(IntPtr(accountUrl));
 
 	newConfiguration->address = configuration->Address;
 	newConfiguration->antiflood = configuration->AntiFlood;
@@ -210,6 +215,7 @@ ConCommon* P23::MetaTrader4::Manager::ClrWrapper::Convert(Common^ configuration)
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(newConfiguration->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 	
 	newConfiguration->optimization_counter = configuration->OptimizationCounter;
 	newConfiguration->optimization_lasttime = configuration->OptimizationLastTime;
@@ -222,18 +228,22 @@ ConCommon* P23::MetaTrader4::Manager::ClrWrapper::Convert(Common^ configuration)
 	char* owner = Convert(configuration->Owner);
 	if (owner != NULL)
 		COPY_STR(newConfiguration->owner, owner);
+	Marshal::FreeHGlobal(IntPtr(owner));
 	
 	char* path_database = Convert(configuration->PathDatabase);
 	if (path_database != NULL)
 		COPY_STR(newConfiguration->path_database, path_database);
+	Marshal::FreeHGlobal(IntPtr(path_database));
 	
 	char* path_history = Convert(configuration->PathHistory);
 	if (path_history != NULL)
 		COPY_STR(newConfiguration->path_history, path_history);
+	Marshal::FreeHGlobal(IntPtr(path_history));
 	
 	char* path_log = Convert(configuration->PathLog);
 	if (path_log != NULL)
 		COPY_STR(newConfiguration->path_log, path_log);
+	Marshal::FreeHGlobal(IntPtr(path_log));
 	
 	newConfiguration->port = configuration->Port;
 	newConfiguration->rollovers_mode = (int)configuration->RolloversMode;
@@ -250,6 +260,7 @@ ConCommon* P23::MetaTrader4::Manager::ClrWrapper::Convert(Common^ configuration)
 	char* timesync = Convert(configuration->TimeSync);
 	if (timesync != NULL)
 		COPY_STR(newConfiguration->timesync, timesync);
+	Marshal::FreeHGlobal(IntPtr(timesync));
 	
 	newConfiguration->timezone = configuration->TimeZone;
 	newConfiguration->typeofdemo = (int)configuration->TypeOfDemo;
@@ -266,7 +277,7 @@ Time^ P23::MetaTrader4::Manager::ClrWrapper::Convert(ConTime* configuration)
 {
 	Time^ newConfiguration = gcnew Time();
 	newConfiguration->Days = gcnew System::Collections::Generic::List<System::Collections::Generic::IList<int>^>();
-	for (int day = 0; day < 7; day++){
+	for (int day = 0; day < 7; day++) {
 		System::Collections::Generic::IList<int>^ dayValues = gcnew System::Collections::Generic::List<int>();
 		for (int hour = 0; hour < 24; hour++)
 			dayValues->Add(configuration->days[day][hour]);
@@ -337,22 +348,26 @@ ConBackup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Backup^ configuration)
 	char* export_path = Convert(configuration->ExportPath);
 	if (export_path != NULL)
 		COPY_STR(newConfiguration->export_path, export_path);
+	Marshal::FreeHGlobal(IntPtr(export_path));
 	
 	newConfiguration->export_period = (int)configuration->ExportPeriod;
 
 	char* export_securities = Convert(configuration->ExportSecurities);
 	if (export_securities != NULL)
 		COPY_STR(newConfiguration->export_securities, export_securities);
+	Marshal::FreeHGlobal(IntPtr(export_securities));
 
 	char* external_path = Convert(configuration->ExternalPath);
 	if (external_path != NULL)
 		COPY_STR(newConfiguration->external_path, external_path);
+	Marshal::FreeHGlobal(IntPtr(external_path));
 				
 	newConfiguration->fullbackup_lasttime = configuration->FullBackupLastTime;
 
 	char* fullbackup_path = Convert(configuration->FullBackupPath);
 	if (fullbackup_path != NULL)
 		COPY_STR(newConfiguration->fullbackup_path, fullbackup_path);
+	Marshal::FreeHGlobal(IntPtr(fullbackup_path));
 	
 	newConfiguration->fullbackup_period = (int)configuration->FullBackupPeriod;
 	newConfiguration->fullbackup_shift = configuration->FullBackupShift;
@@ -364,10 +379,12 @@ ConBackup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Backup^ configuration)
 	char* watch_opposite = Convert(configuration->WatchOpposite);
 	if (watch_opposite != NULL)
 		COPY_STR(newConfiguration->watch_opposite, watch_opposite);
+	Marshal::FreeHGlobal(IntPtr(watch_opposite));
 	
 	char* watch_password = Convert(configuration->WatchPassword);
 	if (watch_password != NULL)
 		COPY_STR(newConfiguration->watch_password, watch_password);
+	Marshal::FreeHGlobal(IntPtr(watch_password));
 	
 	newConfiguration->watch_role = (int)configuration->WatchRole;
 	newConfiguration->watch_state = (char)configuration->WatchState;
@@ -394,10 +411,12 @@ ConSymbolGroup* P23::MetaTrader4::Manager::ClrWrapper::Convert(SymbolGroup^ conf
 	char* description = Convert(configuration->Description);
 	if (description != NULL)
 		COPY_STR(newConfiguration->description, description);
+	Marshal::FreeHGlobal(IntPtr(description));
 
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(newConfiguration->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 	
 	return newConfiguration;
 }
@@ -421,6 +440,7 @@ ConAccess* P23::MetaTrader4::Manager::ClrWrapper::Convert(Access^ configuration)
 	char* comment = Convert(configuration->Comment);
 	if (comment != NULL)
 		COPY_STR(newConfiguration->comment, comment);
+	Marshal::FreeHGlobal(IntPtr(comment));
 
 	newConfiguration->action = (int)configuration->Action;
 	newConfiguration->from = configuration->From;
@@ -451,10 +471,12 @@ ConDataServer* P23::MetaTrader4::Manager::ClrWrapper::Convert(DataServer^ config
 	char* description = Convert(configuration->Description);
 	if (description != NULL)
 		COPY_STR(newConfiguration->description, description);
+	Marshal::FreeHGlobal(IntPtr(description));
 
 	char* server = Convert(configuration->Server);
 	if (server != NULL)
 		COPY_STR(newConfiguration->server, server);
+	Marshal::FreeHGlobal(IntPtr(server));
 
 	newConfiguration->ip = configuration->Ip;
 	newConfiguration->ip_internal = configuration->IpInternal;
@@ -488,10 +510,12 @@ ConHoliday* P23::MetaTrader4::Manager::ClrWrapper::Convert(Holiday^ configuratio
 	char* description = Convert(configuration->Description);
 	if (description != NULL)
 		COPY_STR(newConfiguration->description, description);
+	Marshal::FreeHGlobal(IntPtr(description));
 
 	char* symbol = Convert(configuration->Symbol);
 	if (symbol != NULL)
 		COPY_STR(newConfiguration->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	newConfiguration->day = configuration->Day;
 	newConfiguration->enable = configuration->Enable;
@@ -583,10 +607,12 @@ ConSymbol* P23::MetaTrader4::Manager::ClrWrapper::Convert(Symbol^ configuration)
 	char* currency = Convert(configuration->Currency);
 	if (currency != NULL)
 		COPY_STR(newConfiguration->currency, currency);
+	Marshal::FreeHGlobal(IntPtr(currency));
 	
 	char* description = Convert(configuration->Description);
 	if (description != NULL)
 		COPY_STR(newConfiguration->description, description);
+	Marshal::FreeHGlobal(IntPtr(description));
 
 	newConfiguration->digits = configuration->Digits;
 	newConfiguration->exemode = (int)configuration->Exemode;
@@ -604,6 +630,7 @@ ConSymbol* P23::MetaTrader4::Manager::ClrWrapper::Convert(Symbol^ configuration)
 	char* margin_currency = Convert(configuration->MarginCurrency);
 	if (margin_currency != NULL)
 		COPY_STR(newConfiguration->margin_currency, margin_currency);
+	Marshal::FreeHGlobal(IntPtr(margin_currency));
 
 	newConfiguration->margin_divider = configuration->MarginDivider;
 	newConfiguration->margin_hedged = configuration->MarginHedged;
@@ -616,6 +643,7 @@ ConSymbol* P23::MetaTrader4::Manager::ClrWrapper::Convert(Symbol^ configuration)
 	char* symbol = Convert(configuration->Name);
 	if (symbol != NULL)
 		COPY_STR(newConfiguration->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	newConfiguration->point = configuration->Point;
 	newConfiguration->profit_mode = (int)configuration->ProfitMode;
@@ -628,6 +656,7 @@ ConSymbol* P23::MetaTrader4::Manager::ClrWrapper::Convert(Symbol^ configuration)
 	char* source = Convert(configuration->Source);
 	if (source != NULL)
 		COPY_STR(newConfiguration->source, source);
+	Marshal::FreeHGlobal(IntPtr(source));
 
 	newConfiguration->spread = configuration->Spread;
 	newConfiguration->spread_balance = configuration->SpreadBalance;
@@ -788,6 +817,7 @@ ConGroup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Group^ configuration)
 	char* company = Convert(configuration->Company);
 	if (company != NULL)
 		COPY_STR(newConfiguration->company, company);
+	Marshal::FreeHGlobal(IntPtr(company));
 
 	newConfiguration->copies = configuration->Copies;
 	newConfiguration->credit = configuration->Credit;
@@ -795,6 +825,7 @@ ConGroup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Group^ configuration)
 	char* currency = Convert(configuration->Currency);
 	if (currency != NULL)
 		COPY_STR(newConfiguration->currency, currency);
+	Marshal::FreeHGlobal(IntPtr(currency));
 
 	newConfiguration->default_deposit = configuration->DefaultDeposit;
 	newConfiguration->default_leverage = configuration->DefaultLeverage;
@@ -812,6 +843,7 @@ ConGroup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Group^ configuration)
 	char* group = Convert(configuration->Name);
 	if (group != NULL)
 		COPY_STR(newConfiguration->group, group);
+	Marshal::FreeHGlobal(IntPtr(group));
 
 	newConfiguration->news = (int)configuration->News;
 		
@@ -833,32 +865,39 @@ ConGroup* P23::MetaTrader4::Manager::ClrWrapper::Convert(Group^ configuration)
 	char* signature = Convert(configuration->Signature);
 	if (signature != NULL)
 		COPY_STR(newConfiguration->signature, signature);
+	Marshal::FreeHGlobal(IntPtr(signature));
 
 	char* smtp_login = Convert(configuration->SmtpLogin);
 	if (smtp_login != NULL)
 		COPY_STR(newConfiguration->smtp_login, smtp_login);
+	Marshal::FreeHGlobal(IntPtr(smtp_login));
 
 	char* smtp_password = Convert(configuration->SmtpPassword);
 	if (smtp_password != NULL)
 		COPY_STR(newConfiguration->smtp_password, smtp_password);
+	Marshal::FreeHGlobal(IntPtr(smtp_password));
 
 	char* smtp_server = Convert(configuration->SmtpServer);
 	if (smtp_server != NULL)
 		COPY_STR(newConfiguration->smtp_server, smtp_server);
+	Marshal::FreeHGlobal(IntPtr(smtp_server));
 	
 	newConfiguration->stopout_skip_hedged = configuration->StopOutSkipHedged;
 
 	char* support_email = Convert(configuration->SupportEmail);
 	if (support_email != NULL)
 		COPY_STR(newConfiguration->support_email, support_email);
+	Marshal::FreeHGlobal(IntPtr(support_email));
 
 	char* support_page = Convert(configuration->SupportPage);
 	if (support_page != NULL)
 		COPY_STR(newConfiguration->support_page, support_page);
+	Marshal::FreeHGlobal(IntPtr(support_page));
 
 	char* templates = Convert(configuration->Templates);
 	if (templates != NULL)
 		COPY_STR(newConfiguration->templates, templates);
+	Marshal::FreeHGlobal(IntPtr(templates));
 	
 	newConfiguration->timeout = configuration->Timeout;
 	newConfiguration->use_swap = configuration->UseSwap;
@@ -945,6 +984,7 @@ ConGroupMargin* P23::MetaTrader4::Manager::ClrWrapper::Convert(GroupMargin^ conf
 	char* symbol = Convert(configuration->Symbol);
 	if (symbol != NULL)
 		COPY_STR(newConfiguration->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	return newConfiguration;
 }
@@ -980,30 +1020,36 @@ ConFeeder* P23::MetaTrader4::Manager::ClrWrapper::Convert(Feeder^ configuration)
 	char* file = Convert(configuration->File);
 	if (file != NULL)
 		COPY_STR(newConfiguration->file, file);
+	Marshal::FreeHGlobal(IntPtr(file));
 
 	char* keywords = Convert(configuration->Keywords);
 	if (keywords != NULL)
 		COPY_STR(newConfiguration->keywords, keywords);
+	Marshal::FreeHGlobal(IntPtr(keywords));
 
 	char* login = Convert(configuration->Login);
 	if (login != NULL)
 		COPY_STR(newConfiguration->login, login);
+	Marshal::FreeHGlobal(IntPtr(login));
 
 	newConfiguration->mode = (int)configuration->Mode;
 
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(newConfiguration->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	newConfiguration->news_langid = configuration->NewsLangId;
 
 	char* pass = Convert(configuration->Pass);
 	if (pass != NULL)
 		COPY_STR(newConfiguration->pass, pass);
+	Marshal::FreeHGlobal(IntPtr(pass));
 
 	char* server = Convert(configuration->Server);
 	if (server != NULL)
 		COPY_STR(newConfiguration->server, server);
+	Marshal::FreeHGlobal(IntPtr(server));
 
 	newConfiguration->timeout_reconnect = configuration->TimeoutReconnect;
 	newConfiguration->timeout = configuration->Timeout;
@@ -1042,6 +1088,7 @@ ConLiveUpdate* P23::MetaTrader4::Manager::ClrWrapper::Convert(LiveUpdate^ config
 	char* company = Convert(configuration->Company);
 	if (company != NULL)
 		COPY_STR(newConfiguration->company, company);
+	Marshal::FreeHGlobal(IntPtr(company));
 
 	newConfiguration->connections = configuration->Connections;
 	newConfiguration->enable = configuration->Enable;
@@ -1054,6 +1101,7 @@ ConLiveUpdate* P23::MetaTrader4::Manager::ClrWrapper::Convert(LiveUpdate^ config
 	char* path = Convert(configuration->Path);
 	if (path != NULL)
 		COPY_STR(newConfiguration->path, path);
+	Marshal::FreeHGlobal(IntPtr(path));
 
 	newConfiguration->totalfiles = configuration->Files->Count;
 	newConfiguration->type = (int)configuration->Type;
@@ -1089,20 +1137,24 @@ ConSync* P23::MetaTrader4::Manager::ClrWrapper::Convert(Synchronization^ configu
 	char* login = Convert(configuration->Login);
 	if (login != NULL)
 		COPY_STR(newConfiguration->login, login);
+	Marshal::FreeHGlobal(IntPtr(login));
 
 	newConfiguration->mode = (int)configuration->Mode;
 
 	char* password = Convert(configuration->Password);
 	if (password != NULL)
 		COPY_STR(newConfiguration->password, password);
+	Marshal::FreeHGlobal(IntPtr(password));
 
 	char* securities = Convert(configuration->Securities);
 	if (securities != NULL)
 		COPY_STR(newConfiguration->securities, securities);
+	Marshal::FreeHGlobal(IntPtr(securities));
 
 	char* server = Convert(configuration->Server);
 	if (server != NULL)
 		COPY_STR(newConfiguration->server, server);
+	Marshal::FreeHGlobal(IntPtr(server));
 
 	newConfiguration->to = configuration->To;
 	newConfiguration->unusedport = configuration->UnusedPort;	
@@ -1128,10 +1180,12 @@ LiveInfoFile* P23::MetaTrader4::Manager::ClrWrapper::Convert(FilesConfigurations
 	char* file = Convert(configuration->File);
 	if (file != NULL)
 		COPY_STR(newConfiguration->file, file);
+	Marshal::FreeHGlobal(IntPtr(file));
 
 	char* hash = Convert(configuration->Hash);
 	if (hash != NULL)
 		COPY_STR(newConfiguration->hash, hash);
+	Marshal::FreeHGlobal(IntPtr(hash));
 
 	newConfiguration->size = configuration->Size;
 	
@@ -1182,7 +1236,6 @@ Plugin^ P23::MetaTrader4::Manager::ClrWrapper::Convert(ConPlugin* configuration)
 ConPlugin* P23::MetaTrader4::Manager::ClrWrapper::Convert(Plugin^ configuration)
 {
 	ConPlugin* newConfiguration = new ConPlugin();
-
 	
 	newConfiguration->configurable = configuration->Configurable;
 	newConfiguration->enabled = configuration->Enabled;
@@ -1190,6 +1243,7 @@ ConPlugin* P23::MetaTrader4::Manager::ClrWrapper::Convert(Plugin^ configuration)
 	char* file = Convert(configuration->File);
 	if (file != NULL)
 		COPY_STR(newConfiguration->file, file);
+	Marshal::FreeHGlobal(IntPtr(file));
 
 	newConfiguration->manager_access = configuration->ManagerAccess;
 	newConfiguration->info = *Convert(configuration->Info);
@@ -1215,10 +1269,12 @@ PluginInfo* P23::MetaTrader4::Manager::ClrWrapper::Convert(PluginInformation^ co
 	char* copyright = Convert(configuration->Copyright);
 	if (copyright != NULL)
 		COPY_STR(newConfiguration->copyright, copyright);
+	Marshal::FreeHGlobal(IntPtr(copyright));
 
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(newConfiguration->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	newConfiguration->version = configuration->Version;
 
@@ -1242,10 +1298,12 @@ PluginCfg* P23::MetaTrader4::Manager::ClrWrapper::Convert(PluginConfigurationPar
 	char* name = Convert(configuration->Name);
 	if (name != NULL)
 		COPY_STR(newConfiguration->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	char* value = Convert(configuration->Value);
 	if (value != NULL)
 		COPY_STR(newConfiguration->value, value);
+	Marshal::FreeHGlobal(IntPtr(value));
 
 	return newConfiguration;
 }
@@ -1357,6 +1415,7 @@ P23::MetaTrader4::Manager::Contracts::UserRecord^  P23::MetaTrader4::Manager::Cl
 	output->Taxes = input->taxes;
 	output->UserColor = input->user_color;
 	output->ZipCode = gcnew String(input->zipcode);
+	output->ApiData = gcnew String(input->api_data);
 
 	return output;
 }
@@ -1368,6 +1427,7 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* address = Convert(input->Address);
 	if (address != NULL)
 		COPY_STR(output->address, address);
+	Marshal::FreeHGlobal(IntPtr(address));
 
 	output->agent_account = input->AgentAccount;
 	output->balance = input->Balance;
@@ -1375,20 +1435,24 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* city = Convert(input->City);
 	if (city != NULL)
 		COPY_STR(output->city, city);
+	Marshal::FreeHGlobal(IntPtr(city));
 
 	char* comment = Convert(input->Comment);
 	if (comment != NULL)
 		COPY_STR(output->comment, comment);
+	Marshal::FreeHGlobal(IntPtr(comment));
 
 	char* country = Convert(input->Country);
 	if (country != NULL)
 		COPY_STR(output->country, country);
+	Marshal::FreeHGlobal(IntPtr(country));
 
 	output->credit = input->Credit;
 
 	char* email = Convert(input->Email);
 	if (email != NULL)
 		COPY_STR(output->email, email);
+	Marshal::FreeHGlobal(IntPtr(email));
 
 	output->enable = input->Enable;
 	output->enable_change_password = input->EnableChangePassword;
@@ -1398,6 +1462,7 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* group = Convert(input->Group);
 	if (group != NULL)
 		COPY_STR(output->group, group);
+	Marshal::FreeHGlobal(IntPtr(group));
 
 	char* id = Convert(input->Id);
 	if (id != NULL)
@@ -1410,6 +1475,7 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* leadSource = Convert(input->LeadSource);
 	if (leadSource != NULL)
 		COPY_STR(output->lead_source, leadSource);
+	Marshal::FreeHGlobal(IntPtr(leadSource));
 
 	output->leverage = input->Leverage;
 	output->login = input->Login;
@@ -1418,26 +1484,32 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* name = Convert(input->Name);
 	if (name != NULL)
 		COPY_STR(output->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	char* password = Convert(input->Password);
 	if (password != NULL)
 		COPY_STR(output->password, password);
+	Marshal::FreeHGlobal(IntPtr(password));
 
 	char* password_investor = Convert(input->PasswordInvestor);
 	if (password_investor != NULL)
 		COPY_STR(output->password_investor, password_investor);
+	Marshal::FreeHGlobal(IntPtr(password_investor));
 
 	char* password_phone = Convert(input->PasswordPhone);
 	if (password_phone != NULL)
 		COPY_STR(output->password_phone, password_phone);
+	Marshal::FreeHGlobal(IntPtr(password_phone));
 
 	char* otpSecret = Convert(input->OTPSecret);
 	if (otpSecret != NULL)
 		COPY_STR(output->otp_secret, otpSecret);
+	Marshal::FreeHGlobal(IntPtr(otpSecret));
 
 	char* phone = Convert(input->Phone);
 	if (phone != NULL)
 		COPY_STR(output->phone, phone);
+	Marshal::FreeHGlobal(IntPtr(phone));
 
 	output->prevbalance = input->PrevBalance;
 	output->prevequity = input->PrevEquity;
@@ -1450,10 +1522,12 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* state = Convert(input->State);
 	if (state != NULL)
 		COPY_STR(output->state, state);
+	Marshal::FreeHGlobal(IntPtr(state));
 
 	char* status = Convert(input->Status);
 	if (status != NULL)
 		COPY_STR(output->status, status);
+	Marshal::FreeHGlobal(IntPtr(status));
 
 	output->timestamp = input->Timestamp;
 	output->taxes = input->Taxes;
@@ -1462,6 +1536,12 @@ UserRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* zipcode = Convert(input->ZipCode);
 	if (zipcode != NULL)
 		COPY_STR(output->zipcode, zipcode);
+	Marshal::FreeHGlobal(IntPtr(zipcode));
+
+	char* apiData = Convert(input->ApiData);
+	if (apiData != NULL)
+		COPY_STR(output->api_data, apiData);
+	Marshal::FreeHGlobal(IntPtr(apiData));
 
 	return output;
 }
@@ -1505,6 +1585,11 @@ P23::MetaTrader4::Manager::Contracts::TradeRecord^  P23::MetaTrader4::Manager::C
 	output->Tp = input->tp;
 	output->Volume = input->volume;
 
+	output->ApiData = gcnew List<int>();
+	for (int i = 0; i < 4; i++) {
+		output->ApiData->Add(input->api_data[i]);
+	}
+
 	return output;
 }
 
@@ -1520,12 +1605,17 @@ TradeRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::M
 	char* comment = Convert(input->Comment);
 	if (comment != NULL)
 		COPY_STR(output->comment, comment);
+	Marshal::FreeHGlobal(IntPtr(comment));
 	
 	output->commission = input->Commission;
 	output->commission_agent = input->CommissionAgent;
 
-	output->conv_rates[0] = input->CommissionAgent;
-	output->conv_rates[1] = input->CommissionAgent;
+	if (input->ConvRates->Count != 2) {
+		throw gcnew ArgumentException("Number of ConvRates should be equal to 2", "input.ConvRates");
+	}
+
+	output->conv_rates[0] = input->ConvRates[0];;
+	output->conv_rates[1] = input->ConvRates[1];;
 
 	output->digits = input->Digits;
 	output->expiration = input->Expiration;
@@ -1548,11 +1638,20 @@ TradeRecord*  P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::M
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	output->taxes = input->Taxes;
 	output->timestamp = input->Timestamp;
 	output->tp = input->Tp;
 	output->volume = input->Volume;
+
+	if (input->ApiData->Count != 4) {
+		throw gcnew ArgumentException("Number of ApiData should be equal to 4", "input.ApiData");
+	}
+
+	for (int i = 0; i < 4; i++) {
+		output->api_data[i] = input->ApiData[i];
+	}
 
 	return output;
 }
@@ -1613,6 +1712,7 @@ MailBox* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Manage
 	char* from = Convert(input->From);
 	if (from != NULL)
 		COPY_STR(output->from, from);
+	Marshal::FreeHGlobal(IntPtr(from));
 
 	output->readed = input->Readed;
 	output->sender = input->Sender;
@@ -1620,6 +1720,7 @@ MailBox* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Manage
 	char* subject = Convert(input->Subject);
 	if (subject != NULL)
 		COPY_STR(output->subject, subject);
+	Marshal::FreeHGlobal(IntPtr(subject));
 
 	output->time = input->Time;
 	output->to = input->To;
@@ -1657,16 +1758,19 @@ NewsTopic* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Mana
 	char* category = Convert(input->Category);
 	if (category != NULL)
 		COPY_STR(output->category, category);
+	Marshal::FreeHGlobal(IntPtr(category));
 
 	char* ctm = Convert(input->Ctm);
 	if (ctm != NULL)
 		COPY_STR(output->ctm, ctm);
+	Marshal::FreeHGlobal(IntPtr(ctm));
 
 	output->key = input->Key;
 
 	char* keywords = Convert(input->Keywords);
 	if (keywords != NULL)
 		COPY_STR(output->keywords, keywords);
+	Marshal::FreeHGlobal(IntPtr(keywords));
 
 	output->langid = input->LangId;
 	output->priority = input->Priority;
@@ -1676,6 +1780,7 @@ NewsTopic* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Mana
 	char* topic = Convert(input->Topic);
 	if (topic != NULL)
 		COPY_STR(output->topic, topic);
+	Marshal::FreeHGlobal(IntPtr(topic));
 
 	return output;
 }
@@ -1721,6 +1826,7 @@ TradeTransInfo* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4:
 	char* comment = Convert(input->Comment);
 	if (comment != NULL)
 		COPY_STR(output->comment, comment);
+	Marshal::FreeHGlobal(IntPtr(comment));
 
 	output->crc = input->Crc;
 	output->expiration = input->Expiration;
@@ -1733,6 +1839,7 @@ TradeTransInfo* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4:
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	output->tp = input->Tp;
 	output->type = (UCHAR)input->Type;
@@ -1772,6 +1879,7 @@ GroupCommandInfo* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader
 	char* newgroup = Convert(input->NewGroup);
 	if (newgroup != NULL)
 		COPY_STR(output->newgroup, newgroup);
+	Marshal::FreeHGlobal(IntPtr(newgroup));
 
 	return output;
 }
@@ -1820,8 +1928,9 @@ ReportGroupRequest* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrad
 
 	char* name = Convert(input->Name);
 	if (name != NULL)
-		COPY_STR(output->name, name);
-	
+		COPY_STR(output->name, name);	
+	Marshal::FreeHGlobal(IntPtr(name));
+
 	Marshal::FreeHGlobal(IntPtr(name));
 
 	output->to = input->To;
@@ -1841,6 +1950,7 @@ DailyGroupRequest* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrade
 	char* name = Convert(input->Name);
 	if (name != NULL)
 		COPY_STR(output->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	output->to = input->To;
 	
@@ -2001,6 +2111,7 @@ ChartInfo* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Mana
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	output->timesign = input->TimeSign;
 
@@ -2018,6 +2129,7 @@ TickRequest* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4::Ma
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	return output;
 }
@@ -2049,6 +2161,7 @@ SymbolProperties* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	return output;
 }
@@ -2087,14 +2200,17 @@ ConGatewayAccount* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrade
 	char* address = Convert(input->Address);
 	if (address != NULL)
 		COPY_STR(output->address, address);
+	Marshal::FreeHGlobal(IntPtr(address));
 
 	char* name = Convert(input->Name);
 	if (name != NULL)
 		COPY_STR(output->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	char* password = Convert(input->Password);
 	if (password != NULL)
 		COPY_STR(output->password, password);
+	Marshal::FreeHGlobal(IntPtr(password));
 
 	output->enable = input->Enable;
 	output->flags = (int)input->Flags;
@@ -2130,14 +2246,17 @@ ConGatewayMarkup* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader
 	char* accountName = Convert(input->AccountName);
 	if (accountName != NULL)
 		COPY_STR(output->account_name, accountName);
+	Marshal::FreeHGlobal(IntPtr(accountName));
 
 	char* source = Convert(input->Source);
 	if (source != NULL)
 		COPY_STR(output->source, source);
+	Marshal::FreeHGlobal(IntPtr(source));
 
 	char* symbol = Convert(input->Symbol);
 	if (symbol != NULL)
 		COPY_STR(output->symbol, symbol);
+	Marshal::FreeHGlobal(IntPtr(symbol));
 
 	output->account_id = input->AccountID;
 	output->ask_markup = input->AskMarkup;
@@ -2175,18 +2294,22 @@ ConGatewayRule* P23::MetaTrader4::Manager::ClrWrapper::Convert(P23::MetaTrader4:
 	char* exe_account_name = Convert(input->ExeAccountName);
 	if (exe_account_name != NULL)
 		COPY_STR(output->exe_account_name, exe_account_name);
+	Marshal::FreeHGlobal(IntPtr(exe_account_name));
 
 	char* name = Convert(input->Name);
 	if (name != NULL)
 		COPY_STR(output->name, name);
+	Marshal::FreeHGlobal(IntPtr(name));
 
 	char* request_group = Convert(input->RequestGroup);
 	if (request_group != NULL)
 		COPY_STR(output->request_group, request_group);
+	Marshal::FreeHGlobal(IntPtr(request_group));
 
 	char* request_symbol = Convert(input->RequestSymbol);
 	if (request_symbol != NULL)
 		COPY_STR(output->request_symbol, request_symbol);
+	Marshal::FreeHGlobal(IntPtr(request_symbol));
 
 	output->enable = input->Enable;
 	output->exe_account_id = input->ExeAccountID;

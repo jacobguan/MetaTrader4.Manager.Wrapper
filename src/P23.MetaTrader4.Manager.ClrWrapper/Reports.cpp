@@ -24,8 +24,8 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 		result->Add(Convert(&records[i]));
 
 	_manager->Manager->MemFree(records);
-	
 	delete convertedRequest;
+	delete[] unmanagedLogins;
 	delete[] unmanagedLogins;
 
 	return result;
