@@ -44,6 +44,8 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^  P23::MetaTrader4::Man
 		output->Add(Convert(&result[i]));
 
 	_manager->Manager->MemFree(result);
+	Marshal::FreeHGlobal(IntPtr(f));
+	Marshal::FreeHGlobal(IntPtr(r));
 
 	return output;
 }
@@ -63,6 +65,8 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 		output->Add(Convert(&result[i]));
 
 	_manager->Manager->MemFree(result);
+	Marshal::FreeHGlobal(IntPtr(f));
+	Marshal::FreeHGlobal(IntPtr(r));
 
 	return output;
 }
@@ -75,7 +79,11 @@ int P23::MetaTrader4::Manager::ClrWrapper::BackupRestoreUsers(IList<P23::MetaTra
 	for (int i = 0; i < users->Count; i++)
 		u[i] = *Convert(users[i]);
 
-	return _manager->Manager->BackupRestoreUsers(u, total);
+	int result = _manager->Manager->BackupRestoreUsers(u, total);
+	
+	delete[] u;
+
+	return result;
 }
 
 IList<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>^ P23::MetaTrader4::Manager::ClrWrapper::BackupRestoreOrders(IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ trades)
@@ -93,6 +101,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>^ P23::MetaTrade
 		output->Add(Convert(&result[i]));
 
 	_manager->Manager->MemFree(result);
+	delete[] t;
 
 	return output;
 }

@@ -33,6 +33,8 @@ P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^ P23::MetaTrader4::M
 		e->ErrorCode = result;
 		throw e;
 	}
+
+	Marshal::FreeHGlobal(IntPtr(s));
 	
 	return Convert(&cs);
 }
@@ -50,21 +52,41 @@ P23::MetaTrader4::Manager::Contracts::SymbolInfo^ P23::MetaTrader4::Manager::Clr
 		throw e;
 	}
 
+	Marshal::FreeHGlobal(IntPtr(s));
+
 	return Convert(&si);
 }
 
 int P23::MetaTrader4::Manager::ClrWrapper::SymbolAdd(String^ symbol)
-{	
-	return _manager->Manager->SymbolAdd(Convert(symbol));
+{
+	char* s = Convert(symbol);
+
+	int result = _manager->Manager->SymbolAdd(Convert(symbol));
+
+	Marshal::FreeHGlobal(IntPtr(s));
+
+	return result;
 }
 
 int P23::MetaTrader4::Manager::ClrWrapper::SymbolHide(String^ symbol)
 {
-	return _manager->Manager->SymbolHide(Convert(symbol));
+	char* s = Convert(symbol);
+
+	int result = _manager->Manager->SymbolHide(Convert(symbol));
+
+	Marshal::FreeHGlobal(IntPtr(s));
+
+	return result;
 }
 
 //--- symbol commands
 int P23::MetaTrader4::Manager::ClrWrapper::SymbolSendTick(String^ symbol, double bid, double ask)
 {
-	return _manager->Manager->SymbolSendTick(Convert(symbol), bid, ask);
+	char* s = Convert(symbol);
+
+	int result = _manager->Manager->SymbolSendTick(Convert(symbol), bid, ask);
+
+	Marshal::FreeHGlobal(IntPtr(s));
+
+	return result;
 }

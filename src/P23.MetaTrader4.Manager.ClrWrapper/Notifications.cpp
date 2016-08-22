@@ -11,7 +11,15 @@ int P23::MetaTrader4::Manager::ClrWrapper::NotificationsSend(String^ metaquotesI
 	if (String::IsNullOrEmpty(metaquotesIds))
 		throw gcnew ArgumentNullException("metaquotesIds is mandatory parameter");
 
-	return _manager->Manager->NotificationsSend(ConvertToLPWSTR(metaquotesIds), ConvertToLPCWSTR(message));
+	wchar_t* mids = ConvertToLPWSTR(metaquotesIds);
+	wchar_t* msg = ConvertToLPWSTR(message);
+
+	int result = _manager->Manager->NotificationsSend(mids, msg);
+
+	Marshal::FreeHGlobal(IntPtr(mids));
+	Marshal::FreeHGlobal(IntPtr(msg));
+
+	return result;
 }
 
 int P23::MetaTrader4::Manager::ClrWrapper::NotificationsSend(List<int>^ logins, String^ message)
@@ -27,5 +35,12 @@ int P23::MetaTrader4::Manager::ClrWrapper::NotificationsSend(List<int>^ logins, 
 	for (int i = 0; i < logins->Count; i++)
 		l[i] = logins[i];
 
-	return _manager->Manager->NotificationsSend(l, total, ConvertToLPCWSTR(message));
+	wchar_t* msg = ConvertToLPWSTR(message);
+
+	int result = _manager->Manager->NotificationsSend(l, total, msg);
+
+	delete[] l;
+	Marshal::FreeHGlobal(IntPtr(msg));
+
+	return result;
 }

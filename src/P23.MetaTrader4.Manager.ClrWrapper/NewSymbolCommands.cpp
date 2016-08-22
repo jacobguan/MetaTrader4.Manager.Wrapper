@@ -4,5 +4,11 @@
 
 int P23::MetaTrader4::Manager::ClrWrapper::SymbolChange(P23::MetaTrader4::Manager::Contracts::SymbolProperties^ symbolProperties)
 {
-	return _manager->Manager->SymbolChange(Convert(symbolProperties));
+	SymbolProperties* props = Convert(symbolProperties);
+
+	int result = _manager->Manager->SymbolChange(props);
+	
+	delete props;
+
+	return result;
 }

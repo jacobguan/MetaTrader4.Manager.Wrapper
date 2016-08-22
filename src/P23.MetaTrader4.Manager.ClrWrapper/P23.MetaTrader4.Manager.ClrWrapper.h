@@ -712,7 +712,7 @@ namespace P23 {
 				/// Request performance counters from MT server
 				/// </summary>
 				/// <param name="from">from</param>
-				IList<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>^ PerformaneRequest(UInt32 from);
+				IList<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>^ PerformanceRequest(UInt32 from);
 
 				//--- users/trades backups
 				/// <summary>

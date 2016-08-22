@@ -7,5 +7,11 @@ int P23::MetaTrader4::Manager::ClrWrapper::LicenseCheck(System::String^ licenseN
 	if (System::String::IsNullOrEmpty(licenseName))
 		throw gcnew ArgumentNullException("licenseName");
 	
-	return _manager->Manager->LicenseCheck(Convert(licenseName));
+	char* ln = Convert(licenseName);
+
+	int result = _manager->Manager->LicenseCheck(ln);
+
+	Marshal::FreeHGlobal(IntPtr(ln));
+	
+	return result;
 }
