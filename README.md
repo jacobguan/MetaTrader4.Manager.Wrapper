@@ -1,3 +1,5 @@
+**NOTE:** please use Issues tab only to report bugs or request features. In case of any other questions please use [StackOverflow](https://stackoverflow.com/) and tag [metatrader4](http://stackoverflow.com/questions/tagged/metatrader4).
+
 MetaTrader4.Manager.Wrapper
 ===========================
 

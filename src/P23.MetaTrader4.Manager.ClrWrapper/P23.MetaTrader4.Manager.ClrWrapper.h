@@ -252,6 +252,11 @@ namespace P23 {
 				event PumpingEventHandler^				ActivationUpdated;
 
 				/// <summary>
+				/// Event rised when list of accounts with the margin call state has been updated. Works only in pumping mode
+				/// </summary>
+				event PumpingEventHandler^				MarginCallUpdated;
+
+				/// <summary>
 				/// Event rised when online users updated. Works only in extended pumping mode
 				/// </summary>
 				event OnlineRecordUpdated^				OnlineUpdated;
