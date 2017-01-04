@@ -61,7 +61,7 @@ int P23::MetaTrader4::Manager::ClrWrapper::SymbolAdd(String^ symbol)
 {
 	char* s = Convert(symbol);
 
-	int result = _manager->Manager->SymbolAdd(Convert(symbol));
+	int result = _manager->Manager->SymbolAdd(s);
 
 	Marshal::FreeHGlobal(IntPtr(s));
 
@@ -72,7 +72,7 @@ int P23::MetaTrader4::Manager::ClrWrapper::SymbolHide(String^ symbol)
 {
 	char* s = Convert(symbol);
 
-	int result = _manager->Manager->SymbolHide(Convert(symbol));
+	int result = _manager->Manager->SymbolHide(s);
 
 	Marshal::FreeHGlobal(IntPtr(s));
 
@@ -84,7 +84,7 @@ int P23::MetaTrader4::Manager::ClrWrapper::SymbolSendTick(String^ symbol, double
 {
 	char* s = Convert(symbol);
 
-	int result = _manager->Manager->SymbolSendTick(Convert(symbol), bid, ask);
+	int result = _manager->Manager->SymbolSendTick(s, bid, ask);
 
 	Marshal::FreeHGlobal(IntPtr(s));
 
