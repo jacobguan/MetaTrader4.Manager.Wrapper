@@ -5,6 +5,7 @@ logs
 obj
 news
 Release
+.vs
 *.log
 *.opendb
 *.opensdf
