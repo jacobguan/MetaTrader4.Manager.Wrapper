@@ -11,7 +11,7 @@
 //|                        API Version                               |
 //+------------------------------------------------------------------+
 #define ManAPIProgramVersion  400
-#define ManAPIProgramBuild    950
+#define ManAPIProgramBuild    985
 #define ManAPIVersion         MAKELONG(ManAPIProgramBuild,ManAPIProgramVersion)
 //+------------------------------------------------------------------+
 //| MSVS6 Compatibility                                              |
@@ -547,7 +547,7 @@ struct ConSymbol
    int               swap_enable;                 // enable swaps
    int               swap_type;                   // swap type
    double            swap_long,swap_short;        // swaps values for long & short postions
-   int               swap_rollover3days;          // triple rollover day-0-Monday,1-Tuesday...4-Friday
+   int               swap_rollover3days;          // triple rollover day 0-Sunday,1-Monday,2-Tuesday...
    double            contract_size;               // contract size
    double            tick_value;                  // one tick value
    double            tick_size;                   // one tick size
@@ -1582,7 +1582,7 @@ public:
    virtual int          __stdcall ChartUpdateObsolete(LPCSTR symbol,const int period,const RateInfoOld* rates,int *count)=0;
    virtual int          __stdcall ChartDeleteObsolete(LPCSTR symbol,const int period,const RateInfoOld* rates,int *count)=0;
 //--- performance info
-   virtual PerformanceInfo* __stdcall PerformaneRequest(__time32_t from,int *total)=0;
+   virtual PerformanceInfo* __stdcall PerformanceRequest(__time32_t from,int *total)=0;
 //--- users/trades backups
    virtual BackupInfo*  __stdcall BackupInfoUsers(const int mode,int *total) =0;
    virtual BackupInfo*  __stdcall BackupInfoOrders(const int mode,int *total)=0;

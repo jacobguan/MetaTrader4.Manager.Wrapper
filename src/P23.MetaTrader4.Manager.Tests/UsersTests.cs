@@ -27,7 +27,7 @@ namespace P23.MetaTrader4.Manager.Tests
                 //Arrange
                 var user = new UserRecord
                 {
-                    Group = "demoforex",
+                    Group = "demoforex-usd",
                     Leverage = 100,
                     Name = "Test account",
                     Password = "qwe123",

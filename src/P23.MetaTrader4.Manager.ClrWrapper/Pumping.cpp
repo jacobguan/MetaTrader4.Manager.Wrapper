@@ -27,13 +27,18 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ P23::MetaTra
 P23::MetaTrader4::Manager::Contracts::Configuration::Group^ P23::MetaTrader4::Manager::ClrWrapper::GroupRecordGet(String^ name)
 {
 	ConGroup group;
-	int result = _manager->Manager->GroupRecordGet(Convert(name), &group);
+	char* n = Convert(name);
+
+	int result = _manager->Manager->GroupRecordGet(n, &group);
 	if (result != RET_OK)
 	{
 		P23::MetaTrader4::Manager::Contracts::MetaTraderException^ e = gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException();
 		e->ErrorCode = result;
 		throw e;
 	}
+
+	Marshal::FreeHGlobal(IntPtr(n));
+
 	return Convert(&group);
 }
 
@@ -124,13 +129,15 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Manager::ClrWrapper::TradesGetBySymbol(String^ symbol)
 {
 	int total = 0;
-	TradeRecord* result = _manager->Manager->TradesGetBySymbol(Convert(symbol), &total);
+	char* s = Convert(symbol);
+	TradeRecord* result = _manager->Manager->TradesGetBySymbol(s, &total);
 
 	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
 	_manager->Manager->MemFree(result);
+	Marshal::FreeHGlobal(IntPtr(s));
 
 	return output;
 }
@@ -138,13 +145,15 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Manager::ClrWrapper::TradesGetByLogin(int login, String^ group)
 {
 	int total = 0;
-	TradeRecord* result = _manager->Manager->TradesGetByLogin(login, Convert(group), &total);
+	char* g = Convert(group);
+	TradeRecord* result = _manager->Manager->TradesGetByLogin(login, g, &total);
 
 	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
 	_manager->Manager->MemFree(result);
+	Marshal::FreeHGlobal(IntPtr(g));
 
 	return output;
 }
@@ -200,7 +209,8 @@ IList<P23::MetaTrader4::Manager::Contracts::MarginLevel^>^ P23::MetaTrader4::Man
 P23::MetaTrader4::Manager::Contracts::MarginLevel^ P23::MetaTrader4::Manager::ClrWrapper::MarginLevelGet(int login, String^ group)
 {
 	MarginLevel level;
-	int result = _manager->Manager->MarginLevelGet(login, Convert(group), &level);
+	char* g = Convert(group);
+	int result = _manager->Manager->MarginLevelGet(login, g, &level);
 
 	if (result != RET_OK)
 	{
@@ -208,6 +218,8 @@ P23::MetaTrader4::Manager::Contracts::MarginLevel^ P23::MetaTrader4::Manager::Cl
 		e->ErrorCode = result;
 		throw e;
 	}
+
+	Marshal::FreeHGlobal(IntPtr(g));
 
 	return Convert(&level);
 }

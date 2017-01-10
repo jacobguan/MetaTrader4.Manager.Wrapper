@@ -17,12 +17,15 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	ReportGroupRequest* convertedRequest = Convert(request);
 	convertedRequest->total = logins->Count;
 
-	TradeRecord* records = _manager->Manager->ReportsRequest(convertedRequest, Convert(logins), &total);
+	int* unmanagedLogins = Convert(logins);
+	TradeRecord* records = _manager->Manager->ReportsRequest(convertedRequest, unmanagedLogins, &total);
 	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&records[i]));
 
 	_manager->Manager->MemFree(records);
+	delete convertedRequest;
+	delete[] unmanagedLogins;
 
 	return result;
 }

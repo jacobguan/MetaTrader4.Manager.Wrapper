@@ -115,6 +115,9 @@ void P23::MetaTrader4::Manager::ClrWrapper::ExtendedPumpingNotify(int code, int 
 		case PUMP_UPDATE_ACTIVATION:
 			ActivationUpdated(this, nullptr);
 			break;
+		case PUMP_UPDATE_MARGINCALL:
+			MarginCallUpdated(this, nullptr);
+			break;
 		default: 
 			break;
 	}

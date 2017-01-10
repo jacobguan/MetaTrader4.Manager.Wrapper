@@ -158,5 +158,10 @@ namespace P23.MetaTrader4.Manager.Contracts
         /// Timestamp when traderecord was requested
         /// </summary>
         public UInt32 Timestamp { get; set; }
+
+        /// <summary>
+        /// This field stores user data of Manager API
+        /// </summary>
+        public IList<int> ApiData { get; set; }
     }
 }

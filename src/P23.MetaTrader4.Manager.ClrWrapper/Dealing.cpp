@@ -44,13 +44,16 @@ int P23::MetaTrader4::Manager::ClrWrapper::DealerReset(int id)
 IList<P23::MetaTrader4::Manager::Contracts::TickInfo^>^ P23::MetaTrader4::Manager::ClrWrapper::TickInfoLast(String^ symbol) 
 {
 	int total = 0;
-	TickInfo* ticks = _manager->Manager->TickInfoLast(Convert(symbol), &total);
+	char* s = Convert(symbol);
+	TickInfo* ticks = _manager->Manager->TickInfoLast(s, &total);
 	IList<P23::MetaTrader4::Manager::Contracts::TickInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TickInfo^>();
+
 	for (int i = 0; i < total; i++) {
 		output->Add(Convert(&ticks[i]));
 	}
 
 	_manager->Manager->MemFree(ticks);
+	Marshal::FreeHGlobal(IntPtr(s));
 
 	return output;
 }
