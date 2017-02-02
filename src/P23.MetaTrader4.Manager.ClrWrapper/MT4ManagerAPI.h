@@ -11,7 +11,7 @@
 //|                        API Version                               |
 //+------------------------------------------------------------------+
 #define ManAPIProgramVersion  400
-#define ManAPIProgramBuild    985
+#define ManAPIProgramBuild    1031
 #define ManAPIVersion         MAKELONG(ManAPIProgramBuild,ManAPIProgramVersion)
 //+------------------------------------------------------------------+
 //| MSVS6 Compatibility                                              |
@@ -62,7 +62,8 @@ struct ConCommon
    int               typeofdemo;            // demo-accounts type (DEMO_DISABLED, DEMO_PROLONG, DEMO_FIXED)
    int               timeofdemo;            // demo-account living time
    int               daylightcorrection;    // allow daylight correction
-   char              internal[64];          // reserved
+   char              internal[60];          // reserved
+   int               timezone_real;         // time zone with day light mode
    int               timezone;              // time zone 0-GMT;-1=GMT-1;1=GMT+1;
    char              timesync[64];          // time synchronization server address
    //---
@@ -547,7 +548,7 @@ struct ConSymbol
    int               swap_enable;                 // enable swaps
    int               swap_type;                   // swap type
    double            swap_long,swap_short;        // swaps values for long & short postions
-   int               swap_rollover3days;          // triple rollover day 0-Sunday,1-Monday,2-Tuesday...
+   int               swap_rollover3days;          // triple rollover day-0-Monday,1-Tuesday...4-Friday
    double            contract_size;               // contract size
    double            tick_value;                  // one tick value
    double            tick_size;                   // one tick size
@@ -1095,7 +1096,7 @@ struct TradeRestoreResult
 struct TradeTransInfo
   {
    UCHAR             type;             // trade transaction type
-   char              reserved;         // reserved
+   char              flags;            // flags
    short             cmd;              // trade command
    int               order,orderby;    // order, order by
    char              symbol[12];       // trade symbol
@@ -1138,6 +1139,17 @@ enum
    TT_BR_ORDER_ACTIVATE,               // activate pending order
    TT_BR_ORDER_COMMENT,                // modify comment of order
    TT_BR_BALANCE                       // balance/credit
+  };
+//--- trade request flags
+enum EnReqFlags
+  {
+   TT_FLAG_NONE   =0x00000000,         // flags none
+   TT_FLAG_SIGNAL =0x00000001,         // placed by signal
+   TT_FLAG_EXPERT =0x00000002,         // placed by expert
+   TT_FLAG_GATEWAY=0x00000004,         // placed by gateway
+   TT_FLAG_MOBILE =0x00000008,         // placed by mobile terminal
+   TT_FLAG_WEB    =0x00000010,         // placed by web terminal
+   TT_FLAG_API    =0x00000020,         // placed by api
   };
 //+------------------------------------------------------------------+
 //| Margin level of the user                                         |
