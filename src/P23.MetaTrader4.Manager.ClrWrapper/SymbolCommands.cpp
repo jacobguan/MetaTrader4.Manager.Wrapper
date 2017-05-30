@@ -12,7 +12,7 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^>^ P23::MetaTr
 	int total = 0;
 	ConSymbol* symbols = _manager->Manager->SymbolsGetAll(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^>();
+	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Symbol^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&symbols[i]));
 

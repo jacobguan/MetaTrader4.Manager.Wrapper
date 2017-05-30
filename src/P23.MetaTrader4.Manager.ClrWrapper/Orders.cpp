@@ -19,7 +19,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 {
 	int total = 0;
 	TradeRecord* trades = _manager->Manager->TradesRequest(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&trades[i]));
 
@@ -36,7 +36,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 		o[i] = orders[i];
 
 	TradeRecord* trades = _manager->Manager->TradeRecordsRequest(o, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&trades[i]));
 
@@ -50,7 +50,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 {
 	int total = 0;
 	TradeRecord* trades = _manager->Manager->TradesUserHistory(login, from, to, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&trades[i]));
 

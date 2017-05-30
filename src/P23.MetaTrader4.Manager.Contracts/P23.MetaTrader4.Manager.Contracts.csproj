@@ -79,6 +79,7 @@
     <Compile Include="ChartRequestMode.cs" />
     <Compile Include="Configuration\Enums\OTPMode.cs" />
     <Compile Include="EnNewsFlags.cs" />
+    <Compile Include="EnReqFlags.cs" />
     <Compile Include="FeederModes.cs" />
     <Compile Include="Configuration\Access.cs" />
     <Compile Include="Configuration\Backup.cs" />

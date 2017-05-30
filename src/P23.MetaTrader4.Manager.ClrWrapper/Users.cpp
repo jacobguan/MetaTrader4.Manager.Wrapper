@@ -6,7 +6,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ P23::MetaTrader4::Mana
 {
 	int total = 0;
 	UserRecord* users = _manager->Manager->UsersRequest(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&users[i]));
 
@@ -23,7 +23,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ P23::MetaTrader4::Mana
 		l[i] = logins[i];
 
 	UserRecord* users = _manager->Manager->UserRecordsRequest(l, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&users[i]));
@@ -98,7 +98,7 @@ IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ P23::MetaTrader4::Ma
 {
 	int total = 0;
 	OnlineRecord* users = _manager->Manager->OnlineRequest(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&users[i]));
 

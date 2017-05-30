@@ -7,6 +7,7 @@ int P23::MetaTrader4::Manager::ClrWrapper::TradeCalcProfit(P23::MetaTrader4::Man
 	TradeRecord* tradeRecord = Convert(trade);
 
 	int result = _manager->Manager->TradeCalcProfit(tradeRecord);
+	trade->Profit = tradeRecord->profit;
 
 	delete tradeRecord;
 

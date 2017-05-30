@@ -19,7 +19,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 
 	int* unmanagedLogins = Convert(logins);
 	TradeRecord* records = _manager->Manager->ReportsRequest(convertedRequest, unmanagedLogins, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&records[i]));
 
@@ -49,7 +49,7 @@ IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ P23::MetaTrader4::Man
 	convertedRequest->total = logins->Count;
 
 	DailyReport* records = _manager->Manager->DailyReportsRequest(convertedRequest, Convert(logins), &total);
-	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>();
+	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&records[i]));
 

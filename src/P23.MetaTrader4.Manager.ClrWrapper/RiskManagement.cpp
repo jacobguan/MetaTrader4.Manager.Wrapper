@@ -8,7 +8,7 @@ IList<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>^ P23::MetaTrader4::M
 	int total = 0;
 	SymbolSummary* s = _manager->Manager->SummaryGetAll(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>();
+	IList<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&s[i]));
 
@@ -69,7 +69,7 @@ IList<P23::MetaTrader4::Manager::Contracts::ExposureValue^>^ P23::MetaTrader4::M
 	int total = 0;
 	ExposureValue* s = _manager->Manager->ExposureGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::ExposureValue^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::ExposureValue^>();
+	IList<P23::MetaTrader4::Manager::Contracts::ExposureValue^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::ExposureValue^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&s[i]));
 

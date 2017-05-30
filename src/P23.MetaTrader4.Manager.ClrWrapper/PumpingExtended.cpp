@@ -133,7 +133,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ P23::MetaTrader4::Mana
 	int total = 0;
 	UserRecord* result = _manager->Manager->UsersSyncRead(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -147,7 +147,7 @@ IList<int>^ P23::MetaTrader4::Manager::ClrWrapper::UsersSnapshot()
 	int total = 0;
 	int* result = _manager->Manager->UsersSnapshot(&total);
 
-	IList<int>^ output = gcnew List<int>();
+	IList<int>^ output = gcnew List<int>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(result[i]);
 	return output;
@@ -163,7 +163,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	int total = 0;
 	TradeRecord* result = _manager->Manager->TradesSyncRead(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -177,7 +177,7 @@ IList<int>^ P23::MetaTrader4::Manager::ClrWrapper::TradesSnapshot()
 	int total = 0;
 	int* result = _manager->Manager->TradesSnapshot(&total);
 
-	IList<int>^ output = gcnew List<int>();
+	IList<int>^ output = gcnew List<int>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(result[i]);
 	return output;
@@ -193,7 +193,7 @@ IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ P23::MetaTrader4::Man
 	int total = 0;
 	DailyReport* result = _manager->Manager->DailySyncRead(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>();
+	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 

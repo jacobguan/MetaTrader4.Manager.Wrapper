@@ -46,7 +46,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TickInfo^>^ P23::MetaTrader4::Manage
 	int total = 0;
 	char* s = Convert(symbol);
 	TickInfo* ticks = _manager->Manager->TickInfoLast(s, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::TickInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TickInfo^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TickInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TickInfo^>(total);
 
 	for (int i = 0; i < total; i++) {
 		output->Add(Convert(&ticks[i]));
@@ -69,7 +69,7 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::SymbolGroup^>^ P23::M
 		throw exception;
 	}
 
-	IList<SymbolGroup^>^ output = gcnew List<SymbolGroup^>();
+	IList<SymbolGroup^>^ output = gcnew List<SymbolGroup^>(MAX_SEC_GROUP);
 	for (int i = 0; i < MAX_SEC_GROUP; i++)
 		output->Add(Convert(&configurations[i]));
 
@@ -85,7 +85,7 @@ IList<P23::MetaTrader4::Manager::Contracts::MailBox^>^ P23::MetaTrader4::Manager
 {
 	int total = 0;
 	MailBox* mails = _manager->Manager->MailsRequest(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::MailBox^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::MailBox^>();
+	IList<P23::MetaTrader4::Manager::Contracts::MailBox^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::MailBox^>(total);
 	for (int i = 0; i < total; i++) {
 		output->Add(Convert(&mails[i]));
 	}

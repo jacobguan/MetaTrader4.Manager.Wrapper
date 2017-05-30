@@ -15,7 +15,7 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ P23::MetaTra
 {
 	int total = 0;
 	ConGroup* groups = _manager->Manager->GroupsGet(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>();
+	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&groups[i]));
 
@@ -48,7 +48,7 @@ IList<P23::MetaTrader4::Manager::Contracts::SymbolInfo^>^ P23::MetaTrader4::Mana
 	SymbolInfo si[max];
 	int total = _manager->Manager->SymbolInfoUpdated(si, max);
 	
-	IList<P23::MetaTrader4::Manager::Contracts::SymbolInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::SymbolInfo^>();
+	IList<P23::MetaTrader4::Manager::Contracts::SymbolInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::SymbolInfo^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&si[i]));
 	return output;
@@ -59,7 +59,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ P23::MetaTrader4::Mana
 	int total = 0;
 	UserRecord* result = _manager->Manager->UsersGet(&total);
 	
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -88,7 +88,7 @@ IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ P23::MetaTrader4::Ma
 	int total = 0;
 	OnlineRecord* result = _manager->Manager->OnlineGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::OnlineRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -117,7 +117,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	int total = 0;
 	TradeRecord* result = _manager->Manager->TradesGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -132,7 +132,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	char* s = Convert(symbol);
 	TradeRecord* result = _manager->Manager->TradesGetBySymbol(s, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -148,7 +148,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	char* g = Convert(group);
 	TradeRecord* result = _manager->Manager->TradesGetByLogin(login, g, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -163,7 +163,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 	int total = 0;
 	TradeRecord* result = _manager->Manager->TradesGetByMarket(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -197,7 +197,7 @@ IList<P23::MetaTrader4::Manager::Contracts::MarginLevel^>^ P23::MetaTrader4::Man
 	int total = 0;
 	MarginLevel* result = _manager->Manager->MarginsGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::MarginLevel^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::MarginLevel^>();
+	IList<P23::MetaTrader4::Manager::Contracts::MarginLevel^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::MarginLevel^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -246,7 +246,7 @@ IList<P23::MetaTrader4::Manager::Contracts::RequestInfo^>^ P23::MetaTrader4::Man
 	int total = 0;
 	RequestInfo* result = _manager->Manager->RequestsGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::RequestInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::RequestInfo^>();
+	IList<P23::MetaTrader4::Manager::Contracts::RequestInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::RequestInfo^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -275,7 +275,7 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Plugin^>^ P23::MetaTr
 	int total = 0;
 	ConPlugin* result = _manager->Manager->PluginsGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Plugin^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Plugin^>();
+	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Plugin^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Plugin^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -310,7 +310,7 @@ IList<P23::MetaTrader4::Manager::Contracts::NewsTopic^>^ P23::MetaTrader4::Manag
 	int total = 0;
 	NewsTopic* result = _manager->Manager->NewsGet(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::NewsTopic^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::NewsTopic^>();
+	IList<P23::MetaTrader4::Manager::Contracts::NewsTopic^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::NewsTopic^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 

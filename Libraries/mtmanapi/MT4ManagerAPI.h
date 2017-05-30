@@ -11,7 +11,7 @@
 //|                        API Version                               |
 //+------------------------------------------------------------------+
 #define ManAPIProgramVersion  400
-#define ManAPIProgramBuild    1045
+#define ManAPIProgramBuild    1090
 #define ManAPIVersion         MAKELONG(ManAPIProgramBuild,ManAPIProgramVersion)
 //+------------------------------------------------------------------+
 //| MSVS6 Compatibility                                              |
@@ -95,7 +95,7 @@ struct ConCommon
    //--- overnigths
    __time32_t        overnight_last_day;    // day of last overnight
    __time32_t        overnight_last_time;   // time of last overnight
-   __time32_t        overnight_prev_time;   // time of время next to last overnight
+   __time32_t        overnight_prev_time;   // time of next to last overnight
    //--- month reports
    __time32_t        overmonth_last_month;  // month of last report
    //--- performance base
@@ -553,7 +553,7 @@ struct ConSymbol
    double            tick_value;                  // one tick value
    double            tick_size;                   // one tick size
    int               stops_level;                 // stops deviation value
-   //---            овернайты и прочие свопы
+   //---
    int               gtc_pendings;                // GTC mode { ORDERS_DAILY, ORDERS_GTC, ORDERS_DAILY_NO_STOPS }
    //--- margin calculation
    int               margin_mode;                 // margin calculation mode
@@ -741,7 +741,7 @@ enum
    //--- account status
    RET_ACCOUNT_DISABLED  =64,       // account blocked
    RET_BAD_ACCOUNT_INFO,            // bad account info
-   RET_PUBLIC_KEY_MISSING,          // отсутствует ключ
+   RET_PUBLIC_KEY_MISSING,          // public key missing on external auth
    //--- trade
    RET_TRADE_TIMEOUT     =128,      // trade transatcion timeou expired
    RET_TRADE_BAD_PRICES,            // order has wrong prices
@@ -959,7 +959,7 @@ struct UserRecord
    int               agent_account;              // agent account
    __time32_t        timestamp;                  // timestamp
    int               last_ip;                    // last visit ip
-   //---            торговые данные
+   //--- trade data
    double            balance;                    // balance
    double            prevmonthbalance;           // previous month balance
    double            prevbalance;                // previous day balance
@@ -1265,7 +1265,7 @@ struct SymbolInfo
    int               digits;                // floating point digits
    int               count;                 // symbol counter
    int               visible;               // visibility
-   //--- данные для перерасчёта спреда
+   //---
    int               type;                  // symbol type (symbols group index)
    double            point;                 // symbol point=1/pow(10,digits)
    int               spread;                // symbol spread

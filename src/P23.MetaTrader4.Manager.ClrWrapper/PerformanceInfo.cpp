@@ -5,7 +5,7 @@ IList<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>^ P23::MetaTrader4:
 {
 	int total = 0;
 	PerformanceInfo* infos = _manager->Manager->PerformanceRequest(from, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>();
+	IList<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::PerformanceInfo^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&infos[i]));
 

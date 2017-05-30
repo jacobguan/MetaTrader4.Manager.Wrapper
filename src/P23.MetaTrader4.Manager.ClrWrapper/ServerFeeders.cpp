@@ -5,7 +5,7 @@ IList<P23::MetaTrader4::Manager::Contracts::ServerFeed^>^ P23::MetaTrader4::Mana
 {
 	int total = 0;
 	ServerFeed* feeders = _manager->Manager->SrvFeeders(&total);
-	IList<P23::MetaTrader4::Manager::Contracts::ServerFeed^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::ServerFeed^>();
+	IList<P23::MetaTrader4::Manager::Contracts::ServerFeed^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::ServerFeed^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&feeders[i]));
 

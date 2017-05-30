@@ -3,7 +3,7 @@
   <metadata>
     <id>MetaTrader4.Manager.Wrapper</id>
     <title>MetaTrader4.Manager.Wrapper</title>
-    <version>0.4.6336.38248</version>
+    <version>0.4.6337.32332</version>
     <authors>Uriil</authors>
     <projectUrl>https://github.com/Uriil/MetaTrader4.Manager.Wrapper</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,7 +11,7 @@
     <summary>Managed wrapper around mtmanapi.dll</summary>
     <tags>MetaTrader4 MetaTrader mt4</tags>
     <dependencies>
-      <dependency id="MetaTrader4.Manager.Contracts" version="0.4.6336.38248" />
+      <dependency id="MetaTrader4.Manager.Contracts" version="0.4.6337.32332" />
     </dependencies>
   </metadata>
   <files>
