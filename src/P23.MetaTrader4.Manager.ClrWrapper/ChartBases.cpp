@@ -2,13 +2,14 @@
 
 #include "P23.MetaTrader4.Manager.ClrWrapper.h"
 
-IList<P23::MetaTrader4::Manager::Contracts::RateInfo^>^ P23::MetaTrader4::Manager::ClrWrapper::ChartRequest(P23::MetaTrader4::Manager::Contracts::ChartInfo^ chart, UInt32 timesign)
+IList<P23::MetaTrader4::Manager::Contracts::RateInfo^>^ P23::MetaTrader4::Manager::ClrWrapper::ChartRequest(P23::MetaTrader4::Manager::Contracts::ChartInfo^ chart, [System::Runtime::InteropServices::Out]UInt32% timesign)
 {
 	int total = 0;
-	__time32_t time = (__time32_t)timesign;
+	__time32_t time;
 	ChartInfo* chartInfo = Convert(chart);
 	RateInfo* result = _manager->Manager->ChartRequest(chartInfo, &time, &total);
 	IList<P23::MetaTrader4::Manager::Contracts::RateInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::RateInfo^>();
+	timesign = time;
 
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));

@@ -61,8 +61,9 @@ IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ P23::MetaTrader4::Man
 //--- external command
 int P23::MetaTrader4::Manager::ClrWrapper::ExternalCommand(String^ dataIn, int sizeIn, String^ dataOut, int sizeOut)
 {
-	throw gcnew NotImplementedException();
-	//return _manager->Manager->ExternalCommand(Convert(dataIn), sizeIn,, Convert(dataOut), sizeOut);
+	//throw gcnew NotImplementedException();
+	char* outDataPointer = Convert(dataOut);
+	return _manager->Manager->ExternalCommand(Convert(dataIn), sizeIn, &outDataPointer, &sizeOut);
 }
 
 //--- plugins

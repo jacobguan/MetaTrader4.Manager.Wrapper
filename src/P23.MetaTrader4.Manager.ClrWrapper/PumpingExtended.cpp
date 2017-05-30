@@ -53,7 +53,7 @@ void P23::MetaTrader4::Manager::ClrWrapper::ExtendedPumpingNotify(int code, int 
 		case PUMP_UPDATE_ONLINE:
 			if (data != NULL)
 			{
-				int onlineLogin = (int)data;
+				int onlineLogin = PtrToInt(data);
 				OnlineUpdated(this, onlineLogin);
 			}
 			break;

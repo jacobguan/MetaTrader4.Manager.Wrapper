@@ -30,5 +30,29 @@ namespace P23.MetaTrader4.Manager.Tests
                 Assert.IsTrue(tti.Order > 1000);
             }
         }
+
+        [TestMethod]
+        public void TradeTransaction_ParametersToOpenTradeProvided_TradeOpened()
+        {
+            using (var mt = TestHelpers.CreateWrapper())
+            {
+                //Arrange
+                var tti = new TradeTransInfo
+                {
+                    Cmd = TradeCommand.Balance,
+                    OrderBy = 1000,
+                    Comment = "Test deposit",
+                    Price = 1,
+                    Type = TradeTransactionType.BrBalance
+                };
+
+                //Act
+                var result = mt.TradeTransaction(tti);
+
+                //Assert
+                Assert.AreEqual(0, result);
+                Assert.IsTrue(tti.Order > 1000);
+            }
+        }
     }
 }

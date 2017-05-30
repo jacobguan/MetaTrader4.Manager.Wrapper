@@ -20,7 +20,10 @@ IList<P23::MetaTrader4::Manager::Contracts::SymbolSummary^>^ P23::MetaTrader4::M
 P23::MetaTrader4::Manager::Contracts::SymbolSummary^ P23::MetaTrader4::Manager::ClrWrapper::SummaryGet(String^ symbol)
 {
 	SymbolSummary s;
-	int result = _manager->Manager->SummaryGet(Convert(symbol), &s);
+	char* convertedSymbol = Convert(symbol);
+	int result = _manager->Manager->SummaryGet(convertedSymbol, &s);
+	Marshal::FreeHGlobal(IntPtr(convertedSymbol));
+
 	if (result != RET_OK)
 	{
 		P23::MetaTrader4::Manager::Contracts::MetaTraderException^ e = gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException();
@@ -78,7 +81,10 @@ IList<P23::MetaTrader4::Manager::Contracts::ExposureValue^>^ P23::MetaTrader4::M
 P23::MetaTrader4::Manager::Contracts::ExposureValue^ P23::MetaTrader4::Manager::ClrWrapper::ExposureValueGet(String^ cur)
 {
 	ExposureValue s;
-	int result = _manager->Manager->ExposureValueGet(Convert(cur), &s);
+	char* currency = Convert(cur);
+	int result = _manager->Manager->ExposureValueGet(currency, &s);
+	Marshal::FreeHGlobal(IntPtr(currency));
+
 	if (result != RET_OK)
 	{
 		P23::MetaTrader4::Manager::Contracts::MetaTraderException^ e = gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException();
@@ -101,7 +107,31 @@ P23::MetaTrader4::Manager::Contracts::MarginLevel^ P23::MetaTrader4::Manager::Cl
 	return Convert(&m);
 }
 
-int P23::MetaTrader4::Manager::ClrWrapper::HistoryCorrect(String^ symbol, int updated)
+int P23::MetaTrader4::Manager::ClrWrapper::HistoryCorrect(String^ symbol)
 {
-	return _manager->Manager->HistoryCorrect(Convert(symbol), &updated);
+	int updated;
+	
+	int result = HistoryCorrect(symbol, updated);
+	
+	if (result != RET_OK)
+	{
+		P23::MetaTrader4::Manager::Contracts::MetaTraderException^ e = gcnew P23::MetaTrader4::Manager::Contracts::MetaTraderException();
+		e->ErrorCode = result;
+		throw e;
+	}
+
+	return updated;
+}
+
+int P23::MetaTrader4::Manager::ClrWrapper::HistoryCorrect(String^ symbol, [System::Runtime::InteropServices::Out] int% updated) 
+{
+	int updatedCount;
+
+	char* s = Convert(symbol);
+
+	int result = _manager->Manager->HistoryCorrect(s, &updatedCount);
+	Marshal::FreeHGlobal(IntPtr(s));
+	updated = updatedCount;
+
+	return result;
 }

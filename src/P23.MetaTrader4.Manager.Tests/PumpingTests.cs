@@ -99,5 +99,34 @@ namespace P23.MetaTrader4.Manager.Tests
                 Assert.IsTrue(usersGetResult.Count > 0);
             }
         }
+
+        [TestMethod]
+        public void MarginLevelGet_Invoke_ValidDataReturned()
+        {
+            using (var mt = TestHelpers.CreateWrapper())
+            {
+                //Arrange
+                var autoResetEvent = new AutoResetEvent(false);
+                bool pumpingStarted = false;
+
+                mt.PumpingSwitch(i =>
+                {
+                    if ((PumpingNotificationCodes)i == PumpingNotificationCodes.Start)
+                    {
+                        autoResetEvent.Set();
+                        pumpingStarted = true;
+                    }
+                });
+
+                autoResetEvent.WaitOne(new TimeSpan(0, 0, 10));
+                Assert.IsTrue(pumpingStarted, "Pumping was not started");
+
+                //Act
+                var result = mt.MarginLevelGet(1000, "DE-100-100-demo");
+
+                //Assert
+                Assert.IsNotNull(result);
+            }
+        }
     }
 }
