@@ -145,7 +145,7 @@ namespace P23.MetaTrader4.Manager.Contracts.Configuration
         public double SwapShort { get; set; }
 
         /// <summary>
-        /// Triple rollover day-0-Sunday,1-Monday,2-Tuesday...
+        /// Triple rollover day-0-Monday,1-Tuesday...4-Friday
         /// </summary>
         public int SwapRollover3Days { get; set; }
 

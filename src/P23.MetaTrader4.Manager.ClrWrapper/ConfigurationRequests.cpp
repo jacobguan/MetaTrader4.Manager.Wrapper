@@ -52,7 +52,7 @@ IList<SymbolGroup^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestSymbolGrou
 		throw exception;
 	}
 
-	IList<SymbolGroup^>^ output = gcnew List<SymbolGroup^>();
+	IList<SymbolGroup^>^ output = gcnew List<SymbolGroup^>(MAX_SEC_GROUP);
 	for (int i = 0; i < MAX_SEC_GROUP; i++) 	
 		output->Add(Convert(&configurations[i]));
 	
@@ -61,9 +61,9 @@ IList<SymbolGroup^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestSymbolGrou
 
 IList<Access^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestAccess()
 {
-	IList<Access^>^ configurations = gcnew List<Access^>();
 	int total = 0;
 	ConAccess* result = _manager->Manager->CfgRequestAccess(&total);
+	IList<Access^>^ configurations = gcnew List<Access^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -75,9 +75,9 @@ IList<Access^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestAccess()
 
 IList<DataServer^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestDataServer()
 {
-	IList<DataServer^>^ configurations = gcnew List<DataServer^>();
 	int total = 0;
 	ConDataServer* result = _manager->Manager->CfgRequestDataServer(&total);
+	IList<DataServer^>^ configurations = gcnew List<DataServer^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -89,9 +89,9 @@ IList<DataServer^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestDataServer(
 
 IList<Holiday^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestHoliday()
 {
-	IList<Holiday^>^ configurations = gcnew List<Holiday^>();
 	int total = 0;
 	ConHoliday* result = _manager->Manager->CfgRequestHoliday(&total);
+	IList<Holiday^>^ configurations = gcnew List<Holiday^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -103,9 +103,9 @@ IList<Holiday^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestHoliday()
 
 IList<Symbol^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestSymbol()
 {
-	IList<Symbol^>^ configurations = gcnew List<Symbol^>();
 	int total = 0;
 	ConSymbol* result = _manager->Manager->CfgRequestSymbol(&total);
+	IList<Symbol^>^ configurations = gcnew List<Symbol^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -117,9 +117,9 @@ IList<Symbol^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestSymbol()
 
 IList<Group^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestGroup()
 {
-	IList<Group^>^ configurations = gcnew List<Group^>();
 	int total = 0;
 	ConGroup* result = _manager->Manager->CfgRequestGroup(&total);
+	IList<Group^>^ configurations = gcnew List<Group^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -131,9 +131,9 @@ IList<Group^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestGroup()
 
 IList<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>^     P23::MetaTrader4::Manager::ClrWrapper::CfgRequestManager()
 {
-	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>^ configurations = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>();
 	int total = 0;
 	ConManager* result = _manager->Manager->CfgRequestManager(&total);
+	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>^ configurations = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -145,9 +145,9 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Manager^>^     P23::M
 
 IList<Feeder^>^      P23::MetaTrader4::Manager::ClrWrapper::CfgRequestFeeder()
 {
-	IList<Feeder^>^ configurations = gcnew List<Feeder^>();
 	int total = 0;
 	ConFeeder* result = _manager->Manager->CfgRequestFeeder(&total);
+	IList<Feeder^>^ configurations = gcnew List<Feeder^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -159,9 +159,9 @@ IList<Feeder^>^      P23::MetaTrader4::Manager::ClrWrapper::CfgRequestFeeder()
 
 IList<LiveUpdate^>^  P23::MetaTrader4::Manager::ClrWrapper::CfgRequestLiveUpdate()
 {
-	IList<LiveUpdate^>^ configurations = gcnew List<LiveUpdate^>();
 	int total = 0;
 	ConLiveUpdate* result = _manager->Manager->CfgRequestLiveUpdate(&total);
+	IList<LiveUpdate^>^ configurations = gcnew List<LiveUpdate^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -173,9 +173,9 @@ IList<LiveUpdate^>^  P23::MetaTrader4::Manager::ClrWrapper::CfgRequestLiveUpdate
 
 IList<Synchronization^>^        P23::MetaTrader4::Manager::ClrWrapper::CfgRequestSync()
 {
-	IList<Synchronization^>^ configurations = gcnew List<Synchronization^>();
 	int total = 0;
 	ConSync* result = _manager->Manager->CfgRequestSync(&total);
+	IList<Synchronization^>^ configurations = gcnew List<Synchronization^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));
@@ -187,9 +187,9 @@ IList<Synchronization^>^        P23::MetaTrader4::Manager::ClrWrapper::CfgReques
 
 IList<PluginWithParameters^>^ P23::MetaTrader4::Manager::ClrWrapper::CfgRequestPlugin()
 {
-	IList<PluginWithParameters^>^ configurations = gcnew List<PluginWithParameters^>();
 	int total = 0;
 	ConPluginParam* result = _manager->Manager->CfgRequestPlugin(&total);
+	IList<PluginWithParameters^>^ configurations = gcnew List<PluginWithParameters^>(total);
 
 	for (int i = 0; i < total; i++)
 		configurations->Add(Convert(&result[i]));

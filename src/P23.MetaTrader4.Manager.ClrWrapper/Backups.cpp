@@ -4,9 +4,9 @@
 
 IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ P23::MetaTrader4::Manager::ClrWrapper::BackupInfoUsers(int mode)
 {
-	IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BackupInfo^>();
 	int total = 0;
 	BackupInfo* result = _manager->Manager->BackupInfoUsers(mode, &total);
+	IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BackupInfo^>(total);
 	for (int i = 0; i < total; i++)	
 		output->Add(Convert(&result[i]));
 	
@@ -17,10 +17,9 @@ IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ P23::MetaTrader4::Mana
 
 IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^  P23::MetaTrader4::Manager::ClrWrapper::BackupInfoOrders(int mode)
 {
-
-	IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BackupInfo^>();
 	int total = 0;
 	BackupInfo* result = _manager->Manager->BackupInfoOrders(mode, &total);
+	IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BackupInfo^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -31,7 +30,6 @@ IList<P23::MetaTrader4::Manager::Contracts::BackupInfo^>^  P23::MetaTrader4::Man
 
 IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^  P23::MetaTrader4::Manager::ClrWrapper::BackupRequestUsers(String^ file, String^ request)
 {
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
 	int total = 0;
 	
 	char* f = Convert(file);
@@ -40,6 +38,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^  P23::MetaTrader4::Man
 		throw gcnew ArgumentException("File and request mandatory parameters");
 	
 	UserRecord* result = _manager->Manager->BackupRequestUsers(f, r, &total);
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -52,7 +51,6 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^  P23::MetaTrader4::Man
 
 IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Manager::ClrWrapper::BackupRequestOrders(String^ file, String^ request)
 {
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
 	int total = 0;
 
 	char* f = Convert(file);
@@ -61,6 +59,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 		throw gcnew ArgumentException("File and request mandatory parameters");
 
 	TradeRecord* result = _manager->Manager->BackupRequestOrders(f, r, &total);
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 
@@ -96,7 +95,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>^ P23::MetaTrade
 
 	TradeRestoreResult* result = _manager->Manager->BackupRestoreOrders(t, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRestoreResult^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&result[i]));
 

@@ -8,7 +8,7 @@ IList<P23::MetaTrader4::Manager::Contracts::ServerLog^>^ P23::MetaTrader4::Manag
 	char* f = Convert(filter);
 	ServerLog* logs = _manager->Manager->JournalRequest(mode, from, to, f, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::ServerLog^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::ServerLog^>();
+	IList<P23::MetaTrader4::Manager::Contracts::ServerLog^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::ServerLog^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&logs[i]));
 

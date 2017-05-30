@@ -12,7 +12,7 @@ IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^  P23::MetaTrader4::Man
 
 	UserRecord* users = _manager->Manager->AdmUsersRequest(g, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::UserRecord^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&users[i]));
 	
@@ -32,7 +32,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 
 	TradeRecord* trades = _manager->Manager->AdmTradesRequest(g, openOnly, &total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&trades[i]));
 
@@ -89,7 +89,7 @@ IList<P23::MetaTrader4::Manager::Contracts::BalanceDiff^>^ P23::MetaTrader4::Man
 		l[i] = logins[i];
 
 	BalanceDiff* balanceDiff = _manager->Manager->AdmBalanceCheck(l, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::BalanceDiff^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BalanceDiff^>();
+	IList<P23::MetaTrader4::Manager::Contracts::BalanceDiff^>^ output = gcnew List<P23::MetaTrader4::Manager::Contracts::BalanceDiff^>(total);
 	for (int i = 0; i < total; i++)
 		output->Add(Convert(&balanceDiff[i]));
 

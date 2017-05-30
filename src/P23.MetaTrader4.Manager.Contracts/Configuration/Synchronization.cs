@@ -52,5 +52,10 @@ namespace P23.MetaTrader4.Manager.Contracts.Configuration
         /// Symbols list
         /// </summary>
         public string Securities { get; set; }
+
+        /// <summary>
+        /// Time correction in minutes
+        /// </summary>
+        public int TimeCorrection { get; set; }
     }
 }

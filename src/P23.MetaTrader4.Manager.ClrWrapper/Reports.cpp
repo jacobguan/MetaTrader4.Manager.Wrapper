@@ -19,7 +19,7 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 
 	int* unmanagedLogins = Convert(logins);
 	TradeRecord* records = _manager->Manager->ReportsRequest(convertedRequest, unmanagedLogins, &total);
-	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>();
+	IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::TradeRecord^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&records[i]));
 
@@ -49,7 +49,7 @@ IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ P23::MetaTrader4::Man
 	convertedRequest->total = logins->Count;
 
 	DailyReport* records = _manager->Manager->DailyReportsRequest(convertedRequest, Convert(logins), &total);
-	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>();
+	IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::DailyReport^>(total);
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&records[i]));
 
@@ -61,8 +61,9 @@ IList<P23::MetaTrader4::Manager::Contracts::DailyReport^>^ P23::MetaTrader4::Man
 //--- external command
 int P23::MetaTrader4::Manager::ClrWrapper::ExternalCommand(String^ dataIn, int sizeIn, String^ dataOut, int sizeOut)
 {
-	throw gcnew NotImplementedException();
-	//return _manager->Manager->ExternalCommand(Convert(dataIn), sizeIn,, Convert(dataOut), sizeOut);
+	//throw gcnew NotImplementedException();
+	char* outDataPointer = Convert(dataOut);
+	return _manager->Manager->ExternalCommand(Convert(dataIn), sizeIn, &outDataPointer, &sizeOut);
 }
 
 //--- plugins

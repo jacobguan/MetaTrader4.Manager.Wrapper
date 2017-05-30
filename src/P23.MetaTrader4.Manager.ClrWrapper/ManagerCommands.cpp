@@ -7,7 +7,7 @@ IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ P23::MetaTra
 	int total = 0;
 	ConGroup* groups = _manager->Manager->GroupsRequest(&total);
 
-	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>();
+	IList<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>^ result = gcnew List<P23::MetaTrader4::Manager::Contracts::Configuration::Group^>(total);
 
 	for (int i = 0; i < total; i++)
 		result->Add(Convert(&groups[i]));

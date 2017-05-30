@@ -13,7 +13,12 @@ namespace P23.MetaTrader4.Manager.Contracts
         public TradeTransactionType Type { get; set; }
 
         /// <summary>
-        ///Trade command
+        /// Trade request flags
+        /// </summary>
+        public EnReqFlags Flags { get; set; }
+
+        /// <summary>
+        /// Trade command
         /// </summary>
         public TradeCommand Cmd { get; set; }
 
