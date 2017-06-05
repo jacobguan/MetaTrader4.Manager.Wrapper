@@ -1370,8 +1370,9 @@ namespace P23 {
 				/// <summary>
 				/// Get common parameters
 				/// </summary>
-				int ManagerCommon(Common^ common);
+				Common^ ManagerCommon();
 
+				
 				//--- log access
 				/// <summary>
 				/// Logs Out
