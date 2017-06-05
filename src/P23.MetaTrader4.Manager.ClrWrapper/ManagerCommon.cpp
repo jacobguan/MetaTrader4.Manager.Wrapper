@@ -2,8 +2,15 @@
 
 #include "P23.MetaTrader4.Manager.ClrWrapper.h"
 
-int P23::MetaTrader4::Manager::ClrWrapper::ManagerCommon(Common^ common)
+Common^ P23::MetaTrader4::Manager::ClrWrapper::ManagerCommon()
 {
-	throw gcnew NotImplementedException();
-	//return _manager->Manager->ManagerCommon(Convert(common));
+	ConCommon configuration;
+	int result = _manager->Manager->ManagerCommon(&configuration);
+	if (result != RET_OK)
+	{
+		MetaTrader4::Manager::Contracts::MetaTraderException^ exception = gcnew MetaTrader4::Manager::Contracts::MetaTraderException();
+		exception->ErrorCode = result;
+		throw exception;
+	}
+	return Convert(&configuration);
 }
