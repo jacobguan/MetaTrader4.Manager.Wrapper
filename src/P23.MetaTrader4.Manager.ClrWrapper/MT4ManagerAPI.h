@@ -11,7 +11,7 @@
 //|                        API Version                               |
 //+------------------------------------------------------------------+
 #define ManAPIProgramVersion  400
-#define ManAPIProgramBuild    1065
+#define ManAPIProgramBuild    1090
 #define ManAPIVersion         MAKELONG(ManAPIProgramBuild,ManAPIProgramVersion)
 //+------------------------------------------------------------------+
 //| MSVS6 Compatibility                                              |
