@@ -72,10 +72,10 @@ IList<P23::MetaTrader4::Manager::Contracts::TradeRecord^>^ P23::MetaTrader4::Man
 
 int P23::MetaTrader4::Manager::ClrWrapper::BackupRestoreUsers(IList<P23::MetaTrader4::Manager::Contracts::UserRecord^>^ users)
 {
-	int total = 0;
+	int total = users->Count;
 
-	UserRecord* u = new UserRecord[users->Count];
-	for (int i = 0; i < users->Count; i++)
+	UserRecord* u = new UserRecord[total];
+	for (int i = 0; i < total; i++)
 		u[i] = *Convert(users[i]);
 
 	int result = _manager->Manager->BackupRestoreUsers(u, total);
