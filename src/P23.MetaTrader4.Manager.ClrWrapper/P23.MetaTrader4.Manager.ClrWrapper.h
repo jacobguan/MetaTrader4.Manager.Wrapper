@@ -1372,6 +1372,7 @@ namespace P23 {
 				/// </summary>
 				Common^ ManagerCommon();
 
+				
 				//--- log access
 				/// <summary>
 				/// Logs Out
